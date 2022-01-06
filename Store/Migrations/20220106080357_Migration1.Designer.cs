@@ -10,7 +10,7 @@ using Store.Data;
 namespace Store.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220105144630_Migration1")]
+    [Migration("20220106080357_Migration1")]
     partial class Migration1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,7 +41,11 @@ namespace Store.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("DisplayOrder")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

@@ -1,34 +1,55 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Store.Data;
 using Store.Models;
+using Store.Services;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Store.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly AppDbContext _db;
-
-        public CategoryController(AppDbContext db)
+        private readonly ICategoryService _categoryServise;
+        public async Task<IActionResult> Index()
         {
-            _db = db;
-        }
-        public IActionResult Index()
-        {
-            IEnumerable<Category> category = _db.Category;
-            return View(category);
+            return View(await _categoryServise.Get());
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Details(Guid categoryId)
         {
-            return View();
+            return View(await _categoryServise.GetAsync(categoryId));
+        }
+        public async Task<IActionResult> Create(Guid categoryId)
+        {
+            return View( await _categoryServise.GetAsync(categoryId));
+        }
+
+        public async Task<IActionResult> Edit(Guid categoryId)
+        {
+            return View(await _categoryServise.GetAsync(categoryId));
         }
 
         [HttpPost]
-        public IActionResult Create(Category category)
+        public async Task<IActionResult> Create(Category category)
         {
-            _db.Category.Add(category);
-            _db.SaveChanges();
+            var categoryId = await _categoryServise.CreateAsync(category);
+            return RedirectToAction("Index", "Category", new {categoryId});
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Category category)
+        {
+            var categoryId = await _categoryServise.EditAsync(category);
+            return RedirectToAction("Index", new { categoryId });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(Guid categoryId)
+        {
+            await _categoryServise.DeleteAsync(categoryId);
             return RedirectToAction("Index");
         }
     }
