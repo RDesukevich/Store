@@ -13,10 +13,12 @@ namespace Store.Controllers
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryServise;
+        private readonly IProductService _productService;
 
-        public CategoryController(ICategoryService categoryServise)
+        public CategoryController(ICategoryService categoryServise, IProductService productService)
         {
             _categoryServise = categoryServise;
+            _productService = productService;
         }
 
 
@@ -36,11 +38,15 @@ namespace Store.Controllers
 
         public async Task<IActionResult> Edit(Guid categoryId)
         {
+            var r = (await _categoryServise.Get()).ToList();
+            ViewBag.categoryId = new SelectList(await _productService.Get(), "Id", "Name");
             return View(await _categoryServise.GetAsync(categoryId));
         }
 
         public async Task<IActionResult> Delete(Guid categoryId)
         {
+            var r = (await _categoryServise.Get()).ToList();
+            ViewBag.categoryId = new SelectList(await _productService.Get(), "Id", "Name");
             return View(await _categoryServise.GetAsync(categoryId));
         }
 

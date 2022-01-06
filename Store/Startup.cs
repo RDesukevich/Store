@@ -30,6 +30,7 @@ namespace Store
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IApplicationTypeService, ApplicationTypeService>();
+            services.AddScoped<IProductService, ProductService>();
             services.AddControllersWithViews();
         }
 
