@@ -5,12 +5,26 @@
         <div class="col-6">
             <h2 class="text-primary">Application Type List</h2>
         </div>
-        <div class="col-6">
-            <a asp-controller="ApplicationType" asp-action="Create" class="btn btn-secondary">Create New ApplicationType</a>
+        <div class="col-6 text-right">
+            <a asp-controller="ApplicationType" asp-action="Create" class="btn btn-secondary"> <i class="far fa-plus-square"></i> &nbsp; Create Application Type</a>
         </div>
+    </div>
+    <div class="row">
+        <div class="col font-weight-bold">Name</div>
+        <div class="col font-weight-bold">Options</div>
     </div>
     @foreach(var applicationType in Model)
     {
-        <div>@applicationType.Name</div>
+        <div class="row align-items-center">
+            <div class="col pb-3">@applicationType.Name</div>
+            <div class="col">
+                <div class="row pl-2">
+                    <a asp-controller="ApplicationType" asp-route-applicationTypeId="@applicationType.Id" asp-action="Edit" class="btn btn-secondary mx-2"><i class="fas fa-pen"></i></a>
+                    <form asp-controller="ApplicationType" asp-action="Delete" asp-route-applicationTypeId="@applicationType.Id" method="post">
+                        <button class="btn btn-danger mx-2" type="submit"><i class="fas fa-ban"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
     }
 </div>

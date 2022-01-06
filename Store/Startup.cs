@@ -29,6 +29,7 @@ namespace Store
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IApplicationTypeService, ApplicationTypeService>();
             services.AddControllersWithViews();
         }
 
