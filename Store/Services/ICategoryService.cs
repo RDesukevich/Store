@@ -44,7 +44,8 @@ namespace Store.Services
 
         public async Task DeleteAsync(Guid categoryId)
         {
-            _db.Category.Remove(await _db.Category.AsNoTracking().FirstOrDefaultAsync(p => p.Id == categoryId));
+            _db.Category.Remove(await _db.Category.FirstOrDefaultAsync(p => p.Id == categoryId));
+            await _db.SaveChangesAsync();
         }
 
         public async Task<Guid> CreateAsync(Category category)

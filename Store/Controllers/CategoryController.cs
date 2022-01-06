@@ -13,6 +13,13 @@ namespace Store.Controllers
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryServise;
+
+        public CategoryController(ICategoryService categoryServise)
+        {
+            _categoryServise = categoryServise;
+        }
+
+
         public async Task<IActionResult> Index()
         {
             return View(await _categoryServise.Get());
@@ -32,6 +39,11 @@ namespace Store.Controllers
             return View(await _categoryServise.GetAsync(categoryId));
         }
 
+        public async Task<IActionResult> Delete(Guid categoryId)
+        {
+            return View(await _categoryServise.GetAsync(categoryId));
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(Category category)
         {
@@ -47,7 +59,7 @@ namespace Store.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(Guid categoryId)
+        public async Task<IActionResult> DeletePost(Guid categoryId)
         {
             await _categoryServise.DeleteAsync(categoryId);
             return RedirectToAction("Index");

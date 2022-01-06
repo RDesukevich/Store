@@ -10,19 +10,21 @@
         </div>
     </div>
     <div class="row">
-        <div class="col">Name</div>
-        <div class="col">Display Order</div>
-        <div class="col">Options</div>
+        <div class="col-4 font-weight-bold">Name</div>
+        <div class="col-4 font-weight-bold">Display Order</div>
+        <div class="col-4 font-weight-bold">Options</div>
     </div>
     @foreach(var category in Model)
     {
         <div class="row align-items-center">
-            <div class="col pb-3">@category.Name</div>
-            <div class="col">@category.DisplayOrder</div>
-            <div class="col">
-                <div class="w-75 btn-group" role="group">
-                    <a asp-controller="Category" asp-rout-Id="@category.Id" asp-action="Edit" class="btn btn-secondary mx-2">Edit</a>
-                    <a asp-controller="Category" asp-rout-Id="@category.Id" asp-action="Delete" class="btn btn-danger mx-2">Delete</a>
+            <div class="col-4 pb-3">@category.Name</div>
+            <div class="col-4">@category.DisplayOrder</div>
+            <div class="col-4">
+                <div class="row pl-2">
+                    <a asp-controller="Category" asp-route-categoryId="@category.Id" asp-action="Edit" class="btn btn-secondary mx-2">Edit</a>
+                    <form asp-controller="Category" asp-action="Delete" asp-route-categoryId="@category.Id" method="post">
+                        <input class="btn btn-danger mx-2" value="Delete" type="submit"/>
+                    </form>
                 </div>
             </div>
         </div>
