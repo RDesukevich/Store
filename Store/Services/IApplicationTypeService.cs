@@ -28,12 +28,13 @@ namespace Store.Services
 
         public async Task<IEnumerable<ApplicationType>> Get()
         {
-            return await _db.ApplicationType.ToListAsync();
+            return await _db.ApplicationType.Include(a => a.Product).ToListAsync();
         }
 
         public async Task<ApplicationType> GetAsync(Guid applicationTypeId)
         {
-            return await _db.ApplicationType.FirstOrDefaultAsync(a => a.Id == applicationTypeId);
+            return await _db.ApplicationType.Include(a => a.Product)
+                .FirstOrDefaultAsync(a => a.Id == applicationTypeId);
         }
 
         public async Task<Guid> EditAsync(ApplicationType applicationType)

@@ -4,6 +4,7 @@ using Store.Data;
 using Store.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Store.Services;
 
 namespace Store.Controllers
@@ -11,10 +12,12 @@ namespace Store.Controllers
     public class ApplicationTypeController : Controller
     {
         private readonly IApplicationTypeService _applicationTypeService;
+        private readonly IProductService _productService;
 
-        public ApplicationTypeController(IApplicationTypeService applicationTypeService)
+        public ApplicationTypeController(IApplicationTypeService applicationTypeService, IProductService productService)
         {
             _applicationTypeService = applicationTypeService;
+            _productService = productService;
         }
 
         public async Task<IActionResult> Index()
@@ -34,6 +37,7 @@ namespace Store.Controllers
 
         public async Task<IActionResult> Delete(Guid applicationTypeId)
         {
+            ViewBag.applicationTypeId = new SelectList(await _applicationTypeService.Get(), "Id", "Name");
             return View(await _applicationTypeService.GetAsync(applicationTypeId));
         }
 

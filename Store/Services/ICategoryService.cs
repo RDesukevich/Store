@@ -32,7 +32,8 @@ namespace Store.Services
 
         public async Task<Category> GetAsync (Guid categoryId)
         {
-            return await _db.Category.Include(c => c.Product).FirstOrDefaultAsync(p => p.Id == categoryId);
+            return await _db.Category.Include(c => c.Product)
+                .FirstOrDefaultAsync(p => p.Id == categoryId);
         }
 
         public async Task<Guid> EditAsync(Category category)

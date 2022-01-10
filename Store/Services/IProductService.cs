@@ -34,12 +34,15 @@ namespace Store.Services
 
         public async Task<IEnumerable<Product>> Get()
         {
-            return await _db.Product.Include(p => p.Category).ToListAsync();
+            return await _db.Product.Include(p => p.Category)
+                .Include(a => a.ApplicationType)
+                .ToListAsync();
         }
 
         public async Task<Product> GetAsync(Guid productId)
         {
             return await _db.Product.AsNoTracking().Include(p => p.Category)
+                .Include(a => a.ApplicationType)
                 .FirstOrDefaultAsync(o => o.Id == productId);
         }
 

@@ -17,6 +17,8 @@ namespace Store.Models
         [Display(Name = "Category Type")]
         public Guid CategoryId { get; set; }
         public Category Category { get; set; }
+        public Guid ApplicationTypeId { get; set; }
+        public ApplicationType ApplicationType { get; set; }
 
     }
 }

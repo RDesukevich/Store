@@ -15,12 +15,15 @@ namespace Store.Controllers
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IApplicationTypeService _applicationTypeService;
 
-        public ProductController(IProductService productService, ICategoryService categoryService, IWebHostEnvironment webHostEnvironment)
+        public ProductController(IProductService productService, ICategoryService categoryService,
+            IWebHostEnvironment webHostEnvironment, IApplicationTypeService applicationTypeService)
         {
             _productService = productService;
             _categoryService = categoryService;
             _webHostEnvironment = webHostEnvironment;
+            _applicationTypeService = applicationTypeService;
         }
 
         public async Task<IActionResult> Index()
@@ -32,6 +35,7 @@ namespace Store.Controllers
         {
             var r = (await _productService.Get()).ToList();
             ViewBag.categoryId = new SelectList(await _categoryService.Get(), "Id", "Name");
+            ViewBag.applicationTypeId = new SelectList(await _applicationTypeService.Get(), "Id", "Name");
             return View(await _productService.GetAsync(productId));
         }
 
@@ -39,6 +43,7 @@ namespace Store.Controllers
         {
             var r = (await _productService.Get()).ToList();
             ViewBag.categoryId = new SelectList(await _categoryService.Get(), "Id", "Name");
+            ViewBag.applicationTypeId = new SelectList(await _applicationTypeService.Get(), "Id", "Name");
             return View(await _productService.GetAsync(productId));
         }
 
