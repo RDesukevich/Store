@@ -9,14 +9,14 @@
             <a asp-controller="Product" asp-action="Create" class="btn btn-secondary"> <i class="far fa-plus-square"></i> &nbsp; Create Product</a>
         </div>
     </div>
-    <div class="row">
+    <div class="row border p-1">
         <div class="col-4 font-weight-bold">Name</div>
         <div class="col-4 font-weight-bold">Price</div>
         <div class="col-4 font-weight-bold">Options</div>
     </div>
     @foreach(var product in Model)
     {
-        <div class="row align-items-center">
+        <div class="row align-items-center border p-1">
             <div class="col-4 pb-3">@product.Name</div>
             <div class="col-4 pb-3">@product.Price</div>
             <div class="col-4">

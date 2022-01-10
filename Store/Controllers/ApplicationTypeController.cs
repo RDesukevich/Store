@@ -22,11 +22,6 @@ namespace Store.Controllers
             return View(await _applicationTypeService.Get());
         }
 
-        public async Task<IActionResult> Details(Guid applicationTypeId)
-        {
-            return View(await _applicationTypeService.GetAsync(applicationTypeId));
-        }
-
         public async Task<IActionResult> Create(Guid applicationTypeId)
         {
             return View(await _applicationTypeService.GetAsync(applicationTypeId));

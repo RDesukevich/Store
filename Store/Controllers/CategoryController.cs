@@ -27,10 +27,6 @@ namespace Store.Controllers
             return View(await _categoryServise.Get());
         }
 
-        public async Task<IActionResult> Details(Guid categoryId)
-        {
-            return View(await _categoryServise.GetAsync(categoryId));
-        }
         public async Task<IActionResult> Create(Guid categoryId)
         {
             return View( await _categoryServise.GetAsync(categoryId));
@@ -38,8 +34,6 @@ namespace Store.Controllers
 
         public async Task<IActionResult> Edit(Guid categoryId)
         {
-            var r = (await _categoryServise.Get()).ToList();
-            ViewBag.categoryId = new SelectList(await _productService.Get(), "Id", "Name");
             return View(await _categoryServise.GetAsync(categoryId));
         }
 

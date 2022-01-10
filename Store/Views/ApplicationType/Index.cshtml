@@ -9,13 +9,13 @@
             <a asp-controller="ApplicationType" asp-action="Create" class="btn btn-secondary"> <i class="far fa-plus-square"></i> &nbsp; Create Application Type</a>
         </div>
     </div>
-    <div class="row">
+    <div class="row border p-1">
         <div class="col font-weight-bold">Name</div>
         <div class="col font-weight-bold">Options</div>
     </div>
     @foreach(var applicationType in Model)
     {
-        <div class="row align-items-center">
+        <div class="row align-items-center border p-1">
             <div class="col pb-3">@applicationType.Name</div>
             <div class="col">
                 <div class="row pl-2">

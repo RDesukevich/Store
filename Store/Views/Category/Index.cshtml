@@ -9,17 +9,17 @@
             <a asp-controller="Category" asp-action="Create" class="btn btn-secondary"> <i class="far fa-plus-square"></i> &nbsp; Create Category</a>
         </div>
     </div>
-    <div class="row">
-        <div class="col-4 font-weight-bold">Name</div>
-        <div class="col-4 font-weight-bold">Display Order</div>
-        <div class="col-4 font-weight-bold">Options</div>
+    <div class="row border p-1">
+        <div class="col font-weight-bold">Name</div>
+        <div class="col font-weight-bold">Display Order</div>
+        <div class="col font-weight-bold">Options</div>
     </div>
     @foreach(var category in Model)
     {
-        <div class="row align-items-center">
-            <div class="col-4 pb-3">@category.Name</div>
-            <div class="col-4">@category.DisplayOrder</div>
-            <div class="col-4">
+        <div class="row align-items-center border p-1">
+            <div class="col pb-3" >@category.Name</div>
+            <div class="col">@category.DisplayOrder</div>
+            <div class="col">
                 <div class="row pl-2">
                     <a asp-controller="Category" asp-route-categoryId="@category.Id" asp-action="Edit" class="btn btn-secondary mx-2"><i class="fas fa-pen"></i></a>
                     <form asp-controller="Category" asp-action="Delete" asp-route-categoryId="@category.Id" method="post">
