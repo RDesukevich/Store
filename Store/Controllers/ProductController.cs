@@ -49,6 +49,9 @@ namespace Store.Controllers
 
         public async Task<IActionResult> Delete(Guid productId)
         {
+            var r = (await _productService.Get()).ToList();
+            ViewBag.categoryId = new SelectList(await _categoryService.Get(), "Id", "Name");
+            ViewBag.applicationTypeId = new SelectList(await _applicationTypeService.Get(), "Id", "Name");
             return View(await _productService.GetAsync(productId));
         }
 

@@ -10,16 +10,20 @@
         </div>
     </div>
     <div class="row border p-1">
-        <div class="col-4 font-weight-bold">Name</div>
-        <div class="col-4 font-weight-bold">Price</div>
-        <div class="col-4 font-weight-bold">Options</div>
+        <div class="col font-weight-bold">Name</div>
+        <div class="col font-weight-bold">Price</div>
+        <div class="col font-weight-bold">Category</div>
+        <div class="col font-weight-bold">ApplicationType</div>
+        <div class="col font-weight-bold">Options</div>
     </div>
     @foreach(var product in Model)
     {
         <div class="row align-items-center border p-1">
-            <div class="col-4 pb-3">@product.Name</div>
-            <div class="col-4 pb-3">@product.Price</div>
-            <div class="col-4">
+            <div class="col pb-3">@product.Name</div>
+            <div class="col pb-3">@product.Price</div>
+            <div class="col pb-3">@product.Category.Name</div>
+            <div class="col pb-3">@product.ApplicationType.Name</div>
+            <div class="col">
                 <div class="row pl-2">
                     <a asp-controller="Product" asp-route-productId="@product.Id" asp-action="Edit" class="btn btn-secondary mx-2"><i class="fas fa-pen"></i></a>
                     <form asp-controller="Product" asp-action="Delete" asp-route-productId="@product.Id" method="post">
