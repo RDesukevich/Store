@@ -34,6 +34,18 @@ namespace Store.Controllers
             return View(homeVM);
         }
 
+        public IActionResult Details(Guid productId)
+        {
+            DetailsVM DetailsVM = new DetailsVM()
+            {
+                Product = _db.Product
+                    .Include(c => c.Category)
+                    .Include(c => c.ApplicationType).FirstOrDefault(c => c.Id == productId),
+                ExistsInCart = false
+            };
+            return View(DetailsVM);
+        }
+
         public IActionResult Privacy()
         {
             return View();

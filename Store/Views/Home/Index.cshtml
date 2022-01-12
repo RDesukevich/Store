@@ -1,29 +1,59 @@
 ﻿@model Store.ViewModels.HomeVM
 
 <div class="container">
-    <div class="text-left">
-        <button class="btn btn-secondary filter-button" data-filter="all">All</button>
-        @foreach (var category in Model.Categories)
+    <div class="text-center">
+        <button class="btn btn-dark filter-button" data-filter="all">All</button>
+        @foreach (var obj in Model.Categories)
         {
-            <button class="btn btn-outline-secondary filter-button" data-filter="@category.Name.Replace(' ', '_')">
-                @category.Name
+            <button class="btn btn-outline-secondary filter-button" data-filter="@obj.Name.Replace(' ','_')">
+                @obj.Name
             </button>
         }
     </div>
-    <br/>
+    <br />
     <div class="row">
-        @foreach (var product in Model.Products)
+        @foreach (var prod in Model.Products)
         {
-            <div class="card bg-light d-flex justify-content-between" style="width: 18rem;">
-                <h5 class="card-title text-center">@product.Name</h5>
-                <img class="card-img-top p-2 rounded" width="286px" height="286px" src="@WC.ImagePath@product.Image" alt="Card image cap">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <span class="rounded bg-info p-1 pr-2 pl-2">@product.Category.Name</span>
-                        <span class="rounded bg-secondary p-1 pr-2 pl-2">@product.ApplicationType.Name</span>
+            <div class="col-lg-4 col-md-6 pb-4 filter @prod.Category.Name.Replace(' ','_')">
+                <div class="card bg-white rounded shadow-sm" style="border:1px solid #222">
+                    <div class="card-body px-3 pt-3 pb-1 row">
+                        <div class="col-7"><label class="float-left">@prod.Name</label></div>
+                        <div class="col-5"><label class="float-right">@prod.Price&nbsp;<i class="fas fa-dollar-sign"></i></label> </div>
+                    </div>
+                    <img class="card-img-top mb-3" width="286px" height="286px" src="@WC.ImagePath@prod.Image" alt="Card image cap">
+                    <div class="card-body p-1 px-3 row">
+                        <div class="col-6">
+                            <span class="badge p-2 border w-100 bg-info">@prod.Category.Name</span>
+                        </div>
+                        <div class="col-6 border-0">
+                            <span class="badge p-2 border w-100 bg-secondary">@prod.ApplicationType.Name</span>
+                        </div>
+                        <div class="col-12 p-1">
+                            <a asp-action="Details" asp-route-productId="@prod.Id" class="btn btn-dark form-control btn-sm p-2">Details</a>
+                        </div>
                     </div>
                 </div>
             </div>
         }
     </div>
 </div>
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function(){
+            $(".filter-button").click(function(){
+                var value = $(this).attr('data-filter');
+                if(value == "all")
+                {
+                    $('.filter').show('1000');
+                }
+                else
+                {
+                    $(".filter").not('.'+value).hide('3000');
+                    $('.filter').filter('.'+value).show('3000');
+                }
+            });
+        });
+    </script>
+}
